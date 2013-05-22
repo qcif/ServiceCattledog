@@ -1,4 +1,4 @@
-<%@ page import="servicecattledog.ServiceCatalogueEntry" %>
+<%@ page import="servicecattledog.Service" %>
 <!DOCTYPE html>
 <html>
 	<head>

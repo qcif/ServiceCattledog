@@ -5,9 +5,9 @@ package servicecattledog
 import org.junit.*
 import grails.test.mixin.*
 
-@TestFor(ServiceCatalogueEntryController)
-@Mock(ServiceCatalogueEntry)
-class ServiceCatalogueEntryControllerTests {
+@TestFor(ServiceController)
+@Mock(Service)
+class ServiceControllerTests {
 
     def populateValidParams(params) {
         assert params != null
@@ -47,7 +47,7 @@ class ServiceCatalogueEntryControllerTests {
 
         assert response.redirectedUrl == '/serviceCatalogueEntry/show/1'
         assert controller.flash.message != null
-        assert ServiceCatalogueEntry.count() == 1
+        assert Service.count() == 1
     }
 
     void testShow() {
@@ -57,7 +57,7 @@ class ServiceCatalogueEntryControllerTests {
         assert response.redirectedUrl == '/serviceCatalogueEntry/list'
 
         populateValidParams(params)
-        def serviceCatalogueEntry = new ServiceCatalogueEntry(params)
+        def serviceCatalogueEntry = new Service(params)
 
         assert serviceCatalogueEntry.save() != null
 
@@ -75,7 +75,7 @@ class ServiceCatalogueEntryControllerTests {
         assert response.redirectedUrl == '/serviceCatalogueEntry/list'
 
         populateValidParams(params)
-        def serviceCatalogueEntry = new ServiceCatalogueEntry(params)
+        def serviceCatalogueEntry = new Service(params)
 
         assert serviceCatalogueEntry.save() != null
 
@@ -95,7 +95,7 @@ class ServiceCatalogueEntryControllerTests {
         response.reset()
 
         populateValidParams(params)
-        def serviceCatalogueEntry = new ServiceCatalogueEntry(params)
+        def serviceCatalogueEntry = new Service(params)
 
         assert serviceCatalogueEntry.save() != null
 
@@ -139,17 +139,17 @@ class ServiceCatalogueEntryControllerTests {
         response.reset()
 
         populateValidParams(params)
-        def serviceCatalogueEntry = new ServiceCatalogueEntry(params)
+        def serviceCatalogueEntry = new Service(params)
 
         assert serviceCatalogueEntry.save() != null
-        assert ServiceCatalogueEntry.count() == 1
+        assert Service.count() == 1
 
         params.id = serviceCatalogueEntry.id
 
         controller.delete()
 
-        assert ServiceCatalogueEntry.count() == 0
-        assert ServiceCatalogueEntry.get(serviceCatalogueEntry.id) == null
+        assert Service.count() == 0
+        assert Service.get(serviceCatalogueEntry.id) == null
         assert response.redirectedUrl == '/serviceCatalogueEntry/list'
     }
 }

@@ -47,8 +47,20 @@ body {
 	        box-shadow: 0 0 0.3em #255b17;
 }
 
-#siteLogo {
-	background-color: #abbf78;
+.header {
+	font-family: Arial,Helvetica,sans-serif;
+    font-size: 22px;
+    font-weight: bold;
+    border-bottom: 1px solid #BBBBBB;
+    width: 950px;
+    height: 66px; 
+    padding-top: 25px;
+    padding-left: 15px;
+}
+
+.header a:link {
+	color: #5A5A5A;
+    text-decoration: none;
 }
 
 /* replace with .no-boxshadow body if you have modernizr available */
@@ -89,12 +101,8 @@ img {
 
 /* GENERAL */
 
-#grailsLogo a {
-	display: inline-block;
-	margin: 1em;
-}
-
 .content {
+	margin: 0.8em 1em 0.3em;
 }
 
 .content h1 {
@@ -108,13 +116,14 @@ img {
 }
 
 .footer {
-	background: #abbf78;
 	color: #000;
 	clear: both;
 	font-size: 0.8em;
 	margin-top: 1.5em;
 	padding: 1em;
 	min-height: 1em;
+	border-top: 1px solid #BBBBBB;
+	text-align: center;
 }
 
 .footer a {

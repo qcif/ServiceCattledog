@@ -1,6 +1,7 @@
 package servicecattledog
 
-class ServiceCatalogueEntry {
+class Service {
+	static searchable = true
 
 	RecordMetadata metadata
 	static embedded = ['metadata']
