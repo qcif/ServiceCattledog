@@ -6,4 +6,8 @@ class LocationType {
 	String description = "No description provided"
 
 	static constraints = { title blank:false }
+	
+	String toString(){
+		return title
+	}
 }

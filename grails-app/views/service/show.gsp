@@ -31,12 +31,14 @@
 					
 				</li>
 				</g:if>
-			
-				<g:if test="${serviceInstance?.briefDescription}">
+				
+				<g:if test="${serviceInstance?.categories}">
 				<li class="fieldcontain">
-					<span id="briefDescription-label" class="property-label"><g:message code="service.briefDescription.label" default="Brief Description" /></span>
+					<span id="categories-label" class="property-label"><g:message code="service.categories.label" default="Categories" /></span>
 					
-						<span class="property-value" aria-labelledby="briefDescription-label"><g:fieldValue bean="${serviceInstance}" field="briefDescription"/></span>
+						<g:each in="${serviceInstance.categories}" var="c">
+						<span class="property-value" aria-labelledby="categories-label"><g:link controller="category" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></span>
+						</g:each>
 					
 				</li>
 				</g:if>
@@ -50,35 +52,6 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${serviceInstance?.creatorName}">
-				<li class="fieldcontain">
-					<span id="creatorName-label" class="property-label"><g:message code="service.creatorName.label" default="Creator Name" /></span>
-					
-						<span class="property-value" aria-labelledby="creatorName-label"><g:fieldValue bean="${serviceInstance}" field="creatorName"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${serviceInstance?.creatorEmail}">
-				<li class="fieldcontain">
-					<span id="creatorEmail-label" class="property-label"><g:message code="service.creatorEmail.label" default="Creator Email" /></span>
-					
-						<span class="property-value" aria-labelledby="creatorEmail-label"><g:fieldValue bean="${serviceInstance}" field="creatorEmail"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${serviceInstance?.categories}">
-				<li class="fieldcontain">
-					<span id="categories-label" class="property-label"><g:message code="service.categories.label" default="Categories" /></span>
-					
-						<g:each in="${serviceInstance.categories}" var="c">
-						<span class="property-value" aria-labelledby="categories-label"><g:link controller="category" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${serviceInstance?.currentVersion}">
 				<li class="fieldcontain">
 					<span id="currentVersion-label" class="property-label"><g:message code="service.currentVersion.label" default="Current Version" /></span>
@@ -88,40 +61,11 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${serviceInstance?.dateCreated}">
-				<li class="fieldcontain">
-					<span id="dateCreated-label" class="property-label"><g:message code="service.dateCreated.label" default="Date Created" /></span>
-					
-						<span class="property-value" aria-labelledby="dateCreated-label"><g:formatDate date="${serviceInstance?.dateCreated}" /></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${serviceInstance?.lastUpdated}">
-				<li class="fieldcontain">
-					<span id="lastUpdated-label" class="property-label"><g:message code="service.lastUpdated.label" default="Last Updated" /></span>
-					
-						<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${serviceInstance?.lastUpdated}" /></span>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${serviceInstance?.licence}">
 				<li class="fieldcontain">
 					<span id="licence-label" class="property-label"><g:message code="service.licence.label" default="Licence" /></span>
 					
 						<span class="property-value" aria-labelledby="licence-label"><g:fieldValue bean="${serviceInstance}" field="licence"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${serviceInstance?.locations}">
-				<li class="fieldcontain">
-					<span id="locations-label" class="property-label"><g:message code="service.locations.label" default="Locations" /></span>
-					
-						<g:each in="${serviceInstance.locations}" var="l">
-						<span class="property-value" aria-labelledby="locations-label"><g:link controller="location" action="show" id="${l.id}">${l?.encodeAsHTML()}</g:link></span>
-						</g:each>
 					
 				</li>
 				</g:if>
@@ -149,6 +93,17 @@
 					<span id="trainingDescription-label" class="property-label"><g:message code="service.trainingDescription.label" default="Training Description" /></span>
 					
 						<span class="property-value" aria-labelledby="trainingDescription-label"><g:fieldValue bean="${serviceInstance}" field="trainingDescription"/></span>
+					
+				</li>
+				</g:if>
+				
+				<g:if test="${serviceInstance?.locations}">
+				<li class="fieldcontain">
+					<span id="locations-label" class="property-label"><g:message code="service.locations.label" default="Locations" /></span>
+					
+						<g:each in="${serviceInstance.locations}" var="l">
+						<span class="property-value" aria-labelledby="locations-label"><a href="${l.url}" target="_blank">${l.type.encodeAsHTML()}</a></span>
+						</g:each>
 					
 				</li>
 				</g:if>

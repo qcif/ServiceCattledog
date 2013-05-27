@@ -37,5 +37,9 @@ class Service {
 
 	static searchable = [only: ['title', 'briefDescription', 'fullDescription'],
 		spellCheck: "include"]
+	
+	String toString(){
+		return "$title"
+	}
 
 }

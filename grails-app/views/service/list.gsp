@@ -27,14 +27,8 @@
 						<g:sortableColumn property="title" title="${message(code: 'service.title.label', default: 'Title')}" />
 					
 						<g:sortableColumn property="briefDescription" title="${message(code: 'service.briefDescription.label', default: 'Brief Description')}" />
-					
-						<g:sortableColumn property="fullDescription" title="${message(code: 'service.fullDescription.label', default: 'Full Description')}" />
-					
-						<g:sortableColumn property="creatorName" title="${message(code: 'service.creatorName.label', default: 'Creator Name')}" />
-					
-						<g:sortableColumn property="creatorEmail" title="${message(code: 'service.creatorEmail.label', default: 'Creator Email')}" />
-					
-						<g:sortableColumn property="currentVersion" title="${message(code: 'service.currentVersion.label', default: 'Current Version')}" />
+						
+						<g:sortableColumn property="categories" title="${message(code: 'service.categories.label', default: 'Categories')}" />
 					
 					</tr>
 				</thead>
@@ -45,14 +39,12 @@
 						<td><g:link action="show" id="${serviceInstance.id}">${fieldValue(bean: serviceInstance, field: "title")}</g:link></td>
 					
 						<td>${fieldValue(bean: serviceInstance, field: "briefDescription")}</td>
-					
-						<td>${fieldValue(bean: serviceInstance, field: "fullDescription")}</td>
-					
-						<td>${fieldValue(bean: serviceInstance, field: "creatorName")}</td>
-					
-						<td>${fieldValue(bean: serviceInstance, field: "creatorEmail")}</td>
-					
-						<td>${fieldValue(bean: serviceInstance, field: "currentVersion")}</td>
+						
+						<td>
+							<g:each in="${serviceInstance.categories}" var="c">
+								<span class="property-value" aria-labelledby="categories-label"><g:link controller="category" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></span>
+							</g:each>
+						</td>
 					
 					</tr>
 				</g:each>

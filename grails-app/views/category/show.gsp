@@ -42,6 +42,32 @@
 				</g:if>
 			
 			</ol>
+			<g:if test="${serviceInstanceList}">
+			<h1>Services in this category</h1>
+			<table>
+				<thead>
+					<tr>
+					
+						<g:sortableColumn property="title" title="${message(code: 'service.title.label', default: 'Title')}" />
+					
+						<g:sortableColumn property="briefDescription" title="${message(code: 'service.briefDescription.label', default: 'Brief Description')}" />
+					
+					</tr>
+				</thead>
+				<tbody>
+				<g:each in="${serviceInstanceList}" status="i" var="serviceInstance">
+					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+					
+						<td><g:link controller="service" action="show" id="${serviceInstance.id}">${fieldValue(bean: serviceInstance, field: "title")}</g:link></td>
+					
+						<td>${fieldValue(bean: serviceInstance, field: "briefDescription")}</td>
+					
+					</tr>
+				</g:each>
+				</tbody>
+			</table>
+			</g:if>
+			
 			<g:form>
 				<fieldset class="buttons">
 					<g:hiddenField name="id" value="${categoryInstance?.id}" />

@@ -37,8 +37,9 @@ class CategoryController {
             redirect(action: "list")
             return
         }
-
-        [categoryInstance: categoryInstance]
+		
+		def serviceList = Service.withCriteria{categories{eq('id', id)}}
+        [categoryInstance: categoryInstance, serviceInstanceList: serviceList]
     }
 
     def edit(Long id) {

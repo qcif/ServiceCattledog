@@ -8,4 +8,8 @@ class Category {
     static constraints = {
 		title blank:false
     }
+	
+	String toString() {
+		return title
+	}
 }

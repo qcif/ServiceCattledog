@@ -9,5 +9,12 @@ class Location {
 	String url
 	String description = ""
 
-	//static constraints = { url(blank: false) }
+	static constraints = { 
+		url blank: false, url:true
+		type blank:false
+	}
+	
+	String toString(){
+		return "$type: $url"
+	}
 }
