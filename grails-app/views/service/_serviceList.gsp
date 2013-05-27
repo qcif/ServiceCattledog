@@ -1,7 +1,7 @@
 <ul>
-	<g:each in="${searchResults?}" var="services">
+	<g:each in="${serviceInstanceList?}" var="service">
 		<li>
-			${service.title}
+			${service}
 		</li>
 	</g:each>
 </ul>${searchResults}

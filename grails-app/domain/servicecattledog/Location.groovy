@@ -8,6 +8,7 @@ class Location {
 	LocationType type
 	String url
 	String description = ""
+	Boolean search = true
 
 	static constraints = { 
 		url blank: false, url:true

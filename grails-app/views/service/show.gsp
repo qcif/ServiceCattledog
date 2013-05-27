@@ -32,6 +32,16 @@
 				</li>
 				</g:if>
 				
+				<g:if test="${serviceInstance?.website}">
+				<li class="fieldcontain">
+					<span id="title-label" class="property-label"><g:message code="service.website.label" default="Website" /></span>
+						<span class="property-value" aria-labelledby="website-label">
+						<a href="${serviceInstance.website}" target="_blank">${serviceInstance?.website.encodeAsHTML()}</a>
+						</span>
+					
+				</li>
+				</g:if>
+				
 				<g:if test="${serviceInstance?.categories}">
 				<li class="fieldcontain">
 					<span id="categories-label" class="property-label"><g:message code="service.categories.label" default="Categories" /></span>
@@ -99,7 +109,7 @@
 				
 				<g:if test="${serviceInstance?.locations}">
 				<li class="fieldcontain">
-					<span id="locations-label" class="property-label"><g:message code="service.locations.label" default="Locations" /></span>
+					<span id="locations-label" class="property-label"><g:message code="service.locations.label" default="Resources" /></span>
 					
 						<g:each in="${serviceInstance.locations}" var="l">
 						<span class="property-value" aria-labelledby="locations-label"><a href="${l.url}" target="_blank">${l.type.encodeAsHTML()}</a></span>

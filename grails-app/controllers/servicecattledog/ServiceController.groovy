@@ -124,5 +124,12 @@ class ServiceController {
 			redirect(action: "show", id: id)
 		}
 	}
+
+	def search = {
+		def searchResults = Service.search("*${params.q}*", params)
+		flash.message = "${searchResults.total} results found for search: ${params.q}"
+		flash.q = params.q
+		render(view:"list", model:[serviceInstanceList:searchResults.results, serviceInstanceTotal:searchResults.total])
+	}
 }
 

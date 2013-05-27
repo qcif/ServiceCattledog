@@ -14,6 +14,7 @@ class Service {
 	String fullDescription
 	String currentVersion
 	String licence
+	String website
 
 	//Support provision
 	String supportDescription
@@ -33,6 +34,7 @@ class Service {
 		creatorName blank:false
 		creatorEmail blank:false, email:true
 		categories blank:false
+		website url:true
 	}
 
 	static searchable = [only: ['title', 'briefDescription', 'fullDescription'],
