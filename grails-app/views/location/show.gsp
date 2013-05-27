@@ -23,15 +23,6 @@
 			</g:if>
 			<ol class="property-list location">
 			
-				<g:if test="${locationInstance?.location}">
-				<li class="fieldcontain">
-					<span id="location-label" class="property-label"><g:message code="location.location.label" default="Location" /></span>
-					
-						<span class="property-value" aria-labelledby="location-label"><g:fieldValue bean="${locationInstance}" field="location"/></span>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${locationInstance?.description}">
 				<li class="fieldcontain">
 					<span id="description-label" class="property-label"><g:message code="location.description.label" default="Description" /></span>
@@ -41,11 +32,38 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${locationInstance?.service}">
+				<li class="fieldcontain">
+					<span id="service-label" class="property-label"><g:message code="location.service.label" default="Service" /></span>
+					
+						<span class="property-value" aria-labelledby="service-label"><g:link controller="service" action="show" id="${locationInstance?.service?.id}">${locationInstance?.service?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${locationInstance?.title}">
 				<li class="fieldcontain">
 					<span id="title-label" class="property-label"><g:message code="location.title.label" default="Title" /></span>
 					
 						<span class="property-value" aria-labelledby="title-label"><g:fieldValue bean="${locationInstance}" field="title"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${locationInstance?.type}">
+				<li class="fieldcontain">
+					<span id="type-label" class="property-label"><g:message code="location.type.label" default="Type" /></span>
+					
+						<span class="property-value" aria-labelledby="type-label"><g:link controller="locationType" action="show" id="${locationInstance?.type?.id}">${locationInstance?.type?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${locationInstance?.url}">
+				<li class="fieldcontain">
+					<span id="url-label" class="property-label"><g:message code="location.url.label" default="Url" /></span>
+					
+						<span class="property-value" aria-labelledby="url-label"><g:fieldValue bean="${locationInstance}" field="url"/></span>
 					
 				</li>
 				</g:if>

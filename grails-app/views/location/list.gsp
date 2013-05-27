@@ -24,11 +24,15 @@
 				<thead>
 					<tr>
 					
-						<g:sortableColumn property="location" title="${message(code: 'location.location.label', default: 'Location')}" />
-					
 						<g:sortableColumn property="description" title="${message(code: 'location.description.label', default: 'Description')}" />
 					
+						<th><g:message code="location.service.label" default="Service" /></th>
+					
 						<g:sortableColumn property="title" title="${message(code: 'location.title.label', default: 'Title')}" />
+					
+						<th><g:message code="location.type.label" default="Type" /></th>
+					
+						<g:sortableColumn property="url" title="${message(code: 'location.url.label', default: 'Url')}" />
 					
 					</tr>
 				</thead>
@@ -36,11 +40,15 @@
 				<g:each in="${locationInstanceList}" status="i" var="locationInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${locationInstance.id}">${fieldValue(bean: locationInstance, field: "location")}</g:link></td>
+						<td><g:link action="show" id="${locationInstance.id}">${fieldValue(bean: locationInstance, field: "description")}</g:link></td>
 					
-						<td>${fieldValue(bean: locationInstance, field: "description")}</td>
+						<td>${fieldValue(bean: locationInstance, field: "service")}</td>
 					
 						<td>${fieldValue(bean: locationInstance, field: "title")}</td>
+					
+						<td>${fieldValue(bean: locationInstance, field: "type")}</td>
+					
+						<td>${fieldValue(bean: locationInstance, field: "url")}</td>
 					
 					</tr>
 				</g:each>

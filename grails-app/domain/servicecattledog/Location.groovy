@@ -2,9 +2,12 @@ package servicecattledog
 
 class Location {
 
-	String title
-	String location
-	String description
+	static belongsTo = [service: Service]
+	
+	String title = ""
+	LocationType type
+	String url
+	String description = ""
 
-	static constraints = { location(url:true, blank: false) }
+	//static constraints = { url(blank: false) }
 }

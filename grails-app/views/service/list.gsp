@@ -26,10 +26,15 @@
 					
 						<g:sortableColumn property="title" title="${message(code: 'service.title.label', default: 'Title')}" />
 					
-						<g:sortableColumn property="brief_description" title="${message(code: 'service.brief_description.label', default: 'Briefdescription')}" />
+						<g:sortableColumn property="briefDescription" title="${message(code: 'service.briefDescription.label', default: 'Brief Description')}" />
 					
-						<g:sortableColumn property="full_description" title="${message(code: 'service.full_description.label', default: 'Fulldescription')}" />
+						<g:sortableColumn property="fullDescription" title="${message(code: 'service.fullDescription.label', default: 'Full Description')}" />
 					
+						<g:sortableColumn property="creatorName" title="${message(code: 'service.creatorName.label', default: 'Creator Name')}" />
+					
+						<g:sortableColumn property="creatorEmail" title="${message(code: 'service.creatorEmail.label', default: 'Creator Email')}" />
+					
+						<g:sortableColumn property="currentVersion" title="${message(code: 'service.currentVersion.label', default: 'Current Version')}" />
 					
 					</tr>
 				</thead>
@@ -39,9 +44,15 @@
 					
 						<td><g:link action="show" id="${serviceInstance.id}">${fieldValue(bean: serviceInstance, field: "title")}</g:link></td>
 					
-						<td>${fieldValue(bean: serviceInstance, field: "brief_description")}</td>
+						<td>${fieldValue(bean: serviceInstance, field: "briefDescription")}</td>
 					
-						<td>${fieldValue(bean: serviceInstance, field: "full_description")}</td>			
+						<td>${fieldValue(bean: serviceInstance, field: "fullDescription")}</td>
+					
+						<td>${fieldValue(bean: serviceInstance, field: "creatorName")}</td>
+					
+						<td>${fieldValue(bean: serviceInstance, field: "creatorEmail")}</td>
+					
+						<td>${fieldValue(bean: serviceInstance, field: "currentVersion")}</td>
 					
 					</tr>
 				</g:each>
