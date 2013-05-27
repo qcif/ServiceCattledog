@@ -11,6 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <title><g:layoutTitle default="AeRO Service Catalogue" /></title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<g:javascript library="jquery" plugin="jquery"/>
 <link rel="shortcut icon"
 	href="${resource(dir: 'images', file: 'favicon.ico')}"
 	type="image/x-icon">

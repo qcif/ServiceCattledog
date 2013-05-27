@@ -1,71 +1,73 @@
 package servicecattledog
 
+import org.apache.commons.logging.LogFactory
 import org.springframework.dao.DataIntegrityViolationException
 
 class ServiceController {
 
-	static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-
+	static allowedMethods = [save: "POST", update: "POST", delete: "POST", search:"GET"]
+	private static final log = LogFactory.getLog(this)
+	
 	def index() {
 		redirect(action: "list", params: params)
 	}
 
 	def list(Integer max) {
 		params.max = Math.min(max ?: 10, 100)
-		[serviceCatalogueEntryInstanceList: Service.list(params), serviceCatalogueEntryInstanceTotal: Service.count()]
+		[serviceInstanceList: Service.list(params), serviceInstanceTotal: Service.count()]
 	}
 
 	def create() {
-		[serviceCatalogueEntryInstance: new Service(params)]
+		[serviceInstance: new Service(params)]
 	}
 
 	def save() {
-		def serviceCatalogueEntryInstance = new Service(params)
-		if (!serviceCatalogueEntryInstance.save(flush: true)) {
-			render(view: "create", model: [serviceCatalogueEntryInstance: serviceCatalogueEntryInstance])
+		def serviceInstance = new Service(params)
+		if (!serviceInstance.save(flush: true)) {
+			render(view: "create", model: [serviceInstance: serviceInstance])
 			return
 		}
 
 		flash.message = message(code: 'default.created.message', args: [
-			message(code: 'serviceCatalogueEntry.label', default: 'ServiceCatalogueEntry'),
-			serviceCatalogueEntryInstance.id
+			message(code: 'service.label', default: 'Service'),
+			serviceInstance.id
 		])
-		redirect(action: "show", id: serviceCatalogueEntryInstance.id)
+		redirect(action: "show", id: serviceInstance.id)
 	}
 
 	def show(Long id) {
-		def serviceCatalogueEntryInstance = Service.get(id)
-		if (!serviceCatalogueEntryInstance) {
+		def serviceInstance = Service.get(id)
+		if (!serviceInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [
-				message(code: 'serviceCatalogueEntry.label', default: 'ServiceCatalogueEntry'),
+				message(code: 'service.label', default: 'Service'),
 				id
 			])
 			redirect(action: "list")
 			return
 		}
 
-		[serviceCatalogueEntryInstance: serviceCatalogueEntryInstance]
+		[serviceInstance: serviceInstance]
 	}
 
 	def edit(Long id) {
-		def serviceCatalogueEntryInstance = Service.get(id)
-		if (!serviceCatalogueEntryInstance) {
+		def serviceInstance = Service.get(id)
+		if (!serviceInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [
-				message(code: 'serviceCatalogueEntry.label', default: 'ServiceCatalogueEntry'),
+				message(code: 'service.label', default: 'Service'),
 				id
 			])
 			redirect(action: "list")
 			return
 		}
 
-		[serviceCatalogueEntryInstance: serviceCatalogueEntryInstance]
+		[serviceInstance: serviceInstance]
 	}
 
 	def update(Long id, Long version) {
-		def serviceCatalogueEntryInstance = Service.get(id)
-		if (!serviceCatalogueEntryInstance) {
+		def serviceInstance = Service.get(id)
+		if (!serviceInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [
-				message(code: 'serviceCatalogueEntry.label', default: 'ServiceCatalogueEntry'),
+				message(code: 'service.label', default: 'Service'),
 				id
 			])
 			redirect(action: "list")
@@ -73,35 +75,35 @@ class ServiceController {
 		}
 
 		if (version != null) {
-			if (serviceCatalogueEntryInstance.version > version) {
-				serviceCatalogueEntryInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
+			if (serviceInstance.version > version) {
+				serviceInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
 						[
-							message(code: 'serviceCatalogueEntry.label', default: 'ServiceCatalogueEntry')] as Object[],
-						"Another user has updated this ServiceCatalogueEntry while you were editing")
-				render(view: "edit", model: [serviceCatalogueEntryInstance: serviceCatalogueEntryInstance])
+							message(code: 'service.label', default: 'Service')] as Object[],
+						"Another user has updated this Service while you were editing")
+				render(view: "edit", model: [serviceInstance: serviceInstance])
 				return
 			}
 		}
 
-		serviceCatalogueEntryInstance.properties = params
+		serviceInstance.properties = params
 
-		if (!serviceCatalogueEntryInstance.save(flush: true)) {
-			render(view: "edit", model: [serviceCatalogueEntryInstance: serviceCatalogueEntryInstance])
+		if (!serviceInstance.save(flush: true)) {
+			render(view: "edit", model: [serviceInstance: serviceInstance])
 			return
 		}
 
 		flash.message = message(code: 'default.updated.message', args: [
-			message(code: 'serviceCatalogueEntry.label', default: 'ServiceCatalogueEntry'),
-			serviceCatalogueEntryInstance.id
+			message(code: 'service.label', default: 'Service'),
+			serviceInstance.id
 		])
-		redirect(action: "show", id: serviceCatalogueEntryInstance.id)
+		redirect(action: "show", id: serviceInstance.id)
 	}
 
 	def delete(Long id) {
-		def serviceCatalogueEntryInstance = Service.get(id)
-		if (!serviceCatalogueEntryInstance) {
+		def serviceInstance = Service.get(id)
+		if (!serviceInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [
-				message(code: 'serviceCatalogueEntry.label', default: 'ServiceCatalogueEntry'),
+				message(code: 'service.label', default: 'Service'),
 				id
 			])
 			redirect(action: "list")
@@ -109,33 +111,36 @@ class ServiceController {
 		}
 
 		try {
-			serviceCatalogueEntryInstance.delete(flush: true)
+			serviceInstance.delete(flush: true)
 			flash.message = message(code: 'default.deleted.message', args: [
-				message(code: 'serviceCatalogueEntry.label', default: 'ServiceCatalogueEntry'),
+				message(code: 'service.label', default: 'Service'),
 				id
 			])
 			redirect(action: "list")
 		}
 		catch (DataIntegrityViolationException e) {
 			flash.message = message(code: 'default.not.deleted.message', args: [
-				message(code: 'serviceCatalogueEntry.label', default: 'ServiceCatalogueEntry'),
+				message(code: 'service.label', default: 'Service'),
 				id
 			])
 			redirect(action: "show", id: id)
 		}
 	}
 
-	def searchableService //inject the service (make sure the name is correct)
+	def search(String q){
+		def searchResults = [:]
+		if (q) {
+			searchResults = trySearch { Service.search("*${q}*", [max:10])}
+		}
+		render template: 'searchResults', model: searchResults
+	}
 
-	def search = {
-		def query = params.q
-		if(query){
-			def srchResults = searchableService.search(query)
-			render(view: "phonebook",
-			model: [contactInstanceList: srchResults.results,
-				contactInstanceTotal:srchResults.total])
-		}else{
-			redirect(action: "index")
+	def trySearch(Closure callable) {
+		try {
+			return callable()
+		} catch (Exception e) {
+			log.debug "Search error: ${e.message}",e
+			return []
 		}
 	}
 }

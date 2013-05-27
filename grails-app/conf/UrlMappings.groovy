@@ -9,6 +9,6 @@ class UrlMappings {
 
 		"/"(view:"/index")
 		"500"(view:'/error')
-		"/catalogue"(controller: "service", action: "list")
+		
 	}
 }

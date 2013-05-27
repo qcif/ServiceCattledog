@@ -17,35 +17,35 @@ class ServiceControllerTests {
 
     void testIndex() {
         controller.index()
-        assert "/serviceCatalogueEntry/list" == response.redirectedUrl
+        assert "/service/list" == response.redirectedUrl
     }
 
     void testList() {
 
         def model = controller.list()
 
-        assert model.serviceCatalogueEntryInstanceList.size() == 0
-        assert model.serviceCatalogueEntryInstanceTotal == 0
+        assert model.serviceInstanceList.size() == 0
+        assert model.serviceInstanceTotal == 0
     }
 
     void testCreate() {
         def model = controller.create()
 
-        assert model.serviceCatalogueEntryInstance != null
+        assert model.serviceInstance != null
     }
 
     void testSave() {
         controller.save()
 
-        assert model.serviceCatalogueEntryInstance != null
-        assert view == '/serviceCatalogueEntry/create'
+        assert model.serviceInstance != null
+        assert view == '/service/create'
 
         response.reset()
 
         populateValidParams(params)
         controller.save()
 
-        assert response.redirectedUrl == '/serviceCatalogueEntry/show/1'
+        assert response.redirectedUrl == '/service/show/1'
         assert controller.flash.message != null
         assert Service.count() == 1
     }
@@ -54,102 +54,102 @@ class ServiceControllerTests {
         controller.show()
 
         assert flash.message != null
-        assert response.redirectedUrl == '/serviceCatalogueEntry/list'
+        assert response.redirectedUrl == '/service/list'
 
         populateValidParams(params)
-        def serviceCatalogueEntry = new Service(params)
+        def service = new Service(params)
 
-        assert serviceCatalogueEntry.save() != null
+        assert service.save() != null
 
-        params.id = serviceCatalogueEntry.id
+        params.id = service.id
 
         def model = controller.show()
 
-        assert model.serviceCatalogueEntryInstance == serviceCatalogueEntry
+        assert model.serviceInstance == service
     }
 
     void testEdit() {
         controller.edit()
 
         assert flash.message != null
-        assert response.redirectedUrl == '/serviceCatalogueEntry/list'
+        assert response.redirectedUrl == '/service/list'
 
         populateValidParams(params)
-        def serviceCatalogueEntry = new Service(params)
+        def service = new Service(params)
 
-        assert serviceCatalogueEntry.save() != null
+        assert service.save() != null
 
-        params.id = serviceCatalogueEntry.id
+        params.id = service.id
 
         def model = controller.edit()
 
-        assert model.serviceCatalogueEntryInstance == serviceCatalogueEntry
+        assert model.serviceInstance == service
     }
 
     void testUpdate() {
         controller.update()
 
         assert flash.message != null
-        assert response.redirectedUrl == '/serviceCatalogueEntry/list'
+        assert response.redirectedUrl == '/service/list'
 
         response.reset()
 
         populateValidParams(params)
-        def serviceCatalogueEntry = new Service(params)
+        def service = new Service(params)
 
-        assert serviceCatalogueEntry.save() != null
+        assert service.save() != null
 
         // test invalid parameters in update
-        params.id = serviceCatalogueEntry.id
+        params.id = service.id
         //TODO: add invalid values to params object
 
         controller.update()
 
-        assert view == "/serviceCatalogueEntry/edit"
-        assert model.serviceCatalogueEntryInstance != null
+        assert view == "/service/edit"
+        assert model.serviceInstance != null
 
-        serviceCatalogueEntry.clearErrors()
+        service.clearErrors()
 
         populateValidParams(params)
         controller.update()
 
-        assert response.redirectedUrl == "/serviceCatalogueEntry/show/$serviceCatalogueEntry.id"
+        assert response.redirectedUrl == "/service/show/$service.id"
         assert flash.message != null
 
         //test outdated version number
         response.reset()
-        serviceCatalogueEntry.clearErrors()
+        service.clearErrors()
 
         populateValidParams(params)
-        params.id = serviceCatalogueEntry.id
+        params.id = service.id
         params.version = -1
         controller.update()
 
-        assert view == "/serviceCatalogueEntry/edit"
-        assert model.serviceCatalogueEntryInstance != null
-        assert model.serviceCatalogueEntryInstance.errors.getFieldError('version')
+        assert view == "/service/edit"
+        assert model.serviceInstance != null
+        assert model.serviceInstance.errors.getFieldError('version')
         assert flash.message != null
     }
 
     void testDelete() {
         controller.delete()
         assert flash.message != null
-        assert response.redirectedUrl == '/serviceCatalogueEntry/list'
+        assert response.redirectedUrl == '/service/list'
 
         response.reset()
 
         populateValidParams(params)
-        def serviceCatalogueEntry = new Service(params)
+        def service = new Service(params)
 
-        assert serviceCatalogueEntry.save() != null
+        assert service.save() != null
         assert Service.count() == 1
 
-        params.id = serviceCatalogueEntry.id
+        params.id = service.id
 
         controller.delete()
 
         assert Service.count() == 0
-        assert Service.get(serviceCatalogueEntry.id) == null
-        assert response.redirectedUrl == '/serviceCatalogueEntry/list'
+        assert Service.get(service.id) == null
+        assert response.redirectedUrl == '/service/list'
     }
 }

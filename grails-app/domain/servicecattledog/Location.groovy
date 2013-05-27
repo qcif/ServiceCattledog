@@ -3,9 +3,8 @@ package servicecattledog
 class Location {
 
 	String title
-	URL location
+	String location
 	String description
-	
-    static constraints = {
-    }
+
+	static constraints = { location(url:true, blank: false) }
 }

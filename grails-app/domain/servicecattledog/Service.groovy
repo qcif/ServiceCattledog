@@ -1,43 +1,54 @@
 package servicecattledog
 
-class Service {
-	static searchable = true
+import java.util.Date;
 
-	RecordMetadata metadata
-	static embedded = ['metadata']
-	
+class Service {
+	String creatorName
+	String creatorEmail
+	Date dateCreated
+	Date lastUpdated
+
 	//Service description
 	String title
-	String brief_description
-	String full_description
-	String current_version
+	String briefDescription
+	String fullDescription
+	String currentVersion
 	String licence
 
 	//Support provision
-	String support_description
-	String training_description
-	String service_description
+	String supportDescription
+	String trainingDescription
+	String serviceDescription
 
 	//Key resources
 	static hasMany = [
-		location_public_website:Location,
-		location_service_desk:Location,
-		location_user_mailing_list:Location,
-		location_technical_mailing_list:Location,
-		location_developer_resources:Location,
-		location_system_overview:Location,
-		location_registration_pack:Location,
-		location_user_guide:Location,
-		location_faq:Location,
-		location_install_guide:Location,
-		location_sysadmin_guide:Location,
-		location_developer_guide:Location,
-		location_issues_register:Location,
-		location_codebase:Location,
-		location_security_configuration:Location,
-		location_release_notes:Location]
+		locationPublicWebsite:Location,
+		locationServiceDesk:Location,
+		locationUserMailingList:Location,
+		locationTechnicalMailingList:Location,
+		locationDeveloperResources:Location,
+		locationSystemOverview:Location,
+		locationRegistrationPack:Location,
+		locationUserGuide:Location,
+		locationFaq:Location,
+		locationInstallGuide:Location,
+		locationAdminGuide:Location,
+		locationDeveloperGuide:Location,
+		locationIssuesRegister:Location,
+		locationCodebase:Location,
+		locationSecurityConfiguration:Location,
+		locationReleaseNotes:Location]
 
 
 	static constraints = {
+		title(blank:false)
+		briefDescription(blank:false, size: 1..255)
+		fullDescription(blank:false, size: 1..1000)
+		creatorName(blank:false)
+		creatorEmail(blank:false, email:true)
 	}
+
+	static searchable = [only: ['title', 'briefdescription', 'fulldescription'],
+		spellCheck: "include"]
+
 }
